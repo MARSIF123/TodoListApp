@@ -3,7 +3,7 @@ const Group = require("../Model/groupModel");
 
 //@desc Get all groups
 //@route GET /api/groups
-//@access public
+//@access private
 const getGroups = asyncHandler(async (req, res) => {
   const groups = await Group.find();
   console.log(groups);
@@ -18,7 +18,7 @@ const getGroups = asyncHandler(async (req, res) => {
 
 //@desc Get one groups
 //@route GET /api/groups/:id
-//@access public
+//@access private
 const getGroup = asyncHandler(async (req, res) => {
   const group = await Group.findById(req.params.id);
   if (!group) {
@@ -32,7 +32,7 @@ const getGroup = asyncHandler(async (req, res) => {
 
 //@desc Add one group
 //@route POST /api/groups
-//@access public
+//@access private
 const addGroup = asyncHandler(async (req, res) => {
   const { title } = req.body;
   if (!title) {
@@ -47,7 +47,7 @@ const addGroup = asyncHandler(async (req, res) => {
 
 //@desc Update one group
 //@route UPDATE /api/groups
-//@access public
+//@access private
 const updateGroup = asyncHandler(async (req, res) => {
   const { title } = req.body;
   if (!title) {
@@ -66,7 +66,7 @@ const updateGroup = asyncHandler(async (req, res) => {
 
 //@desc Delet one group
 //@route DELETE /api/groups
-//@access public
+//@access private
 const deleteGroup = asyncHandler(async (req, res) => {
   const group = await Group.findByIdAndDelete(req.params.id);
 
