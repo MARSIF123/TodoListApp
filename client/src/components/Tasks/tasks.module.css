@@ -1,0 +1,12 @@
+.scroll {
+  max-height: 480px;
+  overflow-y: scroll;
+}
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+.notFound {
+  color: white;
+  font-size: large;
+  padding: 85px;
+}

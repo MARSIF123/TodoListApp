@@ -1,9 +1,16 @@
 import React from "react";
 import styles from "./navItems.module.css";
 import { NavLink } from "react-router-dom";
+import { userCtx } from "../../../context/UserContextProvider";
 
 function NavItems() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const { email, isLoggedIn } = React.useContext(userCtx);
+  console.log({ email, isLoggedIn });
+  let username;
+  if (email) {
+    [username] = email.split("@");
+  }
+
   return (
     <ul className={styles.nav}>
       <li className={styles.li}>
@@ -24,7 +31,7 @@ function NavItems() {
               return isActive ? { color: "#c95353" } : {};
             }}
           >
-            Maryam
+            {username}
           </NavLink>
         ) : (
           <NavLink
