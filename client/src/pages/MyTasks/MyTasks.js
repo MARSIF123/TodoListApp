@@ -1,11 +1,9 @@
 import React from "react";
-import Sidebar from "../../components/SideBar/Sidebar";
 import Tasks from "../../components/Tasks/Tasks";
 
 function MyTasks() {
   return (
     <>
-      <Sidebar />
       <div
         style={{
           paddingTop: 8,
