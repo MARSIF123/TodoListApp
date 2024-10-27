@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./tasks.module.css";
 import { tasksCtx } from "../../context/TaskContextProvider";
 import TaskItem from "./TaskItem/TaskItem";
+import TaskInput from "./TaskInput/TaskInput";
 
 function Tasks() {
   const { filteredTasks } = React.useContext(tasksCtx);
@@ -25,6 +26,7 @@ function Tasks() {
           <p className={styles.notFound}>{`No Tasks Found '(`}</p>
         )}
       </div>
+      <TaskInput />
     </>
   );
 }

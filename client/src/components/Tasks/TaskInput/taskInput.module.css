@@ -1,0 +1,29 @@
+.card {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 9vh;
+  width: 850px;
+  margin: 10px auto;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  padding: 5px;
+}
+
+.card input {
+  flex: 2;
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 15px;
+}
+.card button {
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+}
