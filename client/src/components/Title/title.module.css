@@ -1,0 +1,10 @@
+.title {
+  background: linear-gradient(
+    to left,
+    var(--secondary-color),
+    var(--primary-color)
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
