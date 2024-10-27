@@ -1,0 +1,21 @@
+.header {
+  max-height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0px;
+}
+
+.logo img {
+  max-height: 50px;
+  /* Adjust maximum height of logo */
+  max-width: 368px;
+  /* Adjust maximum width of logo */
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+  }
+}
