@@ -1,0 +1,46 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  align-items: flex-start;
+  min-height: 50vh;
+  margin-top: 100px;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+}
+
+.input:last-child {
+  margin-bottom: 200px;
+}
+
+.label,
+.input {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.input {
+  border: none;
+  border-bottom: 3px solid black;
+  outline: none;
+  padding: 4px;
+}
+
+.input:hover {
+  border-color: var(--hover-color);
+}
+
+.input:focus {
+  border: 3px solid var(--hover-color);
+  border-radius: 5px;
+}
+
+@media (max-width: 600px) {
+  .main {
+    align-items: center;
+    justify-content: center;
+  }
+}
