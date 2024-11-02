@@ -48,26 +48,74 @@ function TasksContextProvider({ children }) {
     }
   };
 
-  const toggleTaskCompletion = (taskId) => {
-    const newTasks = tasks.map((task) => {
-      if (task.id === taskId) {
-        return { ...task, isCompleted: !task.isCompleted };
-      }
-      return task;
-    });
-    setTasks(newTasks);
-    setFilteredTasks(newTasks);
+  const toggleTaskCompletion = async (taskId, isCompleted) => {
+    const token = window.localStorage.getItem("jwt");
+    console.log("Update task Completion ", token);
+    try {
+      const res = await api.put(
+        `/tasks/${taskId}`,
+        {
+          isCompleted: !isCompleted,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log(res.data.task);
+      const newTasks = tasks.map((task) => {
+        if (task._id === taskId) {
+          return { ...task, isCompleted: !task.isCompleted };
+        }
+        return task;
+      });
+      setTasks(newTasks);
+      setFilteredTasks(newTasks);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
-  const toggleTaskImportance = (taskId) => {
-    const newTasks = tasks.map((task) => {
-      if (task.id === taskId) {
-        return { ...task, isImportant: !task.isImportant };
-      }
-      return task;
-    });
-    setTasks(newTasks);
-    setFilteredTasks(newTasks);
+  const toggleTaskImportance = async (taskId, isImportant) => {
+    const token = window.localStorage.getItem("jwt");
+    console.log("Update task Importance ", token);
+    try {
+      const res = await api.put(
+        `/tasks/${taskId}`,
+        {
+          isImportant: !isImportant,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const newTasks = tasks.map((task) => {
+        if (task._id === taskId) {
+          return { ...task, isImportant: !task.isImportant };
+        }
+        return task;
+      });
+      setTasks(newTasks);
+      setFilteredTasks(newTasks);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const deleteTask = async (id) => {
+    const token = window.localStorage.getItem("jwt");
+    console.log("Delete task  ", token);
+    try {
+      const res = await api.delete(`/tasks/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const newTasks = tasks.filter((t) => {
+        return t._id !== id;
+      });
+      setTasks(newTasks);
+      setFilteredTasks(newTasks);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   const filterTasks = (type) => {
@@ -91,33 +139,21 @@ function TasksContextProvider({ children }) {
     }
     if (type === "today") {
       const today = new Date();
-      const todayFormatted =
-        today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear();
-
       console.log({ today });
       setFilteredTasks(
         tasks.filter((task) => {
-          const day =
-            task.dueDate.getDate() +
-            "-" +
-            task.dueDate.getMonth() +
-            "-" +
-            task.dueDate.getFullYear();
-          console.log({ day });
-          return day === todayFormatted;
+          const date = new Date(task.dueDate);
+
+          return (
+            date.getDate() === today.getDate() &&
+            date.getMonth() === today.getMonth() &&
+            date.getFullYear() === today.getFullYear()
+          );
         })
       );
     }
 
     return;
-  };
-
-  const deleteTask = (id) => {
-    const newTasks = tasks.filter((t) => {
-      return t.id !== id;
-    });
-    setTasks(newTasks);
-    setFilteredTasks(newTasks);
   };
 
   const searchTasks = (searchTerm) => {
@@ -129,6 +165,7 @@ function TasksContextProvider({ children }) {
     });
     setFilteredTasks(temp);
   };
+
   const value = {
     filteredTasks,
     setFilteredTasks,
