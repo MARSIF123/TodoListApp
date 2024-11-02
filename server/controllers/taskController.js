@@ -31,21 +31,24 @@ const getTask = asyncHandler(async (req, res) => {
 //@access private
 const addTask = asyncHandler(async (req, res) => {
   const { text, groupId, isCompleted, isImportant, dueDate } = req.body;
-  console.log(text, groupId, isCompleted, isImportant);
-  if (!text || !groupId) {
+  if (!text) {
     console.log("All fields are mandetory!!");
     res.status(400);
     throw new Error("All fields are mandetory.");
   } else {
-    const task = await Task.create({
-      text,
-      groupId,
-      isCompleted,
-      isImportant,
-      dueDate,
-      userId: req.user.id,
-    });
-    res.send({ message: "Task added ", task }).status(201);
+    try {
+      const task = await Task.create({
+        text,
+        isCompleted,
+        isImportant,
+        dueDate,
+        userId: req.user.id,
+      });
+      res.send({ message: "Task added ", task }).status(201);
+    } catch (err) {
+      console.log(err);
+      console.log("WTF");
+    }
   }
 });
 

@@ -32,7 +32,7 @@ const loginUser = asyncHandler(async (req, res) => {
     res.status(200).json({ message: "Successfully Login!!", token });
   } else {
     res.status(404);
-    throw new Error("Invalid password or email");
+    throw new Error("Invalid password or email. Try agian.");
   }
 });
 
@@ -40,8 +40,8 @@ const loginUser = asyncHandler(async (req, res) => {
 //@route POST /api/users/register
 //@access public
 const registerUser = asyncHandler(async (req, res) => {
-  const { username, email, password } = req.body;
-  if ((!username, !email, !password)) {
+  const { email, password } = req.body;
+  if (!email || !password) {
     res.status(400);
     throw new Error("All fields are required!!!");
   }
@@ -54,11 +54,21 @@ const registerUser = asyncHandler(async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const newUser = await User.create({
-    username,
     email,
     password: hashedPassword,
   });
-  res.status(200).json({ message: "user registered", newUser });
+  const token = jwt.sign(
+    {
+      user: {
+        id: newUseruser.id,
+        username: newUser.username,
+        email: newUser.email,
+      },
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "10m" }
+  );
+  res.status(200).json({ message: "Successfully Login!!", token });
 });
 
 module.exports = { currentUser, loginUser, registerUser };

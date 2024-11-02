@@ -5,17 +5,14 @@ import {
   FaSearch,
   FaStar,
   FaCalendar,
-  FaArrowDown,
   FaPlus,
   FaCheckSquare,
 } from "react-icons/fa";
 import { tasksCtx } from "../../context/TaskContextProvider";
 
 function Sidebar() {
-  const { filterTasks, groups, filterByGroup, searchTasks } =
-    React.useContext(tasksCtx);
+  const { filterTasks, searchTasks } = React.useContext(tasksCtx);
   const [searchTerm, setSeacrhTerm] = React.useState("");
-  const [isOpen, setIsOpen] = React.useState(false);
   const [type, setType] = React.useState("");
 
   React.useEffect(() => {
@@ -78,30 +75,6 @@ function Sidebar() {
         >
           <FaCheckSquare /> Completed
         </button>
-        <button
-          className={styles.button}
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
-        >
-          <FaArrowDown /> My Projects
-        </button>
-        {isOpen && (
-          <div>
-            {groups.map((g) => (
-              <button
-                className={styles.button}
-                key={g.groupId}
-                style={{ marginLeft: 10 }}
-                onClick={() => {
-                  filterByGroup(g.groupId);
-                }}
-              >
-                #{g.title}
-              </button>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );

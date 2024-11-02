@@ -5,11 +5,6 @@ const taskSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  groupId: {
-    type: mongoose.Schema.Types.ObjectId, // Reference to Group model
-    ref: "Group",
-    required: true,
-  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -25,7 +20,6 @@ const taskSchema = mongoose.Schema({
   },
   dueDate: {
     type: Date,
-    default: Date.now,
   },
 });
 

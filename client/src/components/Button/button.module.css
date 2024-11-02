@@ -5,6 +5,7 @@
   background-color: var(--primary-color);
   padding: 12px 34px;
   border-radius: 30px;
+  cursor: pointer;
 }
 .button:hover {
   background-color: var(--hover-color);

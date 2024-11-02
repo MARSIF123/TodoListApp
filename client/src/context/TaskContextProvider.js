@@ -1,50 +1,51 @@
 import React from "react";
+import api from "../api/axios-api";
 
 export const tasksCtx = React.createContext();
-const INITIAL_STATE = [
-  {
-    id: crypto.randomUUID(),
-    text: "Pay Electricity bill.",
-    groupId: 1,
-    isCompleted: false,
-    isImportant: true,
-    dueDate: new Date(),
-  },
-  {
-    id: crypto.randomUUID(),
-    text: "Email to university.",
-    groupId: 2,
-    isCompleted: true,
-    isImportant: false,
-    dueDate: new Date(),
-  },
-];
 
 function TasksContextProvider({ children }) {
-  const [tasks, setTasks] = React.useState(INITIAL_STATE);
-  const [filteredTasks, setFilteredTasks] = React.useState(INITIAL_STATE);
+  //State Variables
+  const [tasks, setTasks] = React.useState();
+  const [filteredTasks, setFilteredTasks] = React.useState();
 
-  const [groups, setGroups] = React.useState([
-    {
-      groupId: crypto.randomUUID(),
-      title: "Home Tasks",
-    },
-  ]);
+  const fetchTasks = async () => {
+    const token = window.localStorage.getItem("jwt");
+    console.log("Fetching tasks");
+    console.log({ token });
+    try {
+      const res = await api.get("/tasks", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setTasks(res.data.tasks);
+      console.log(res.data.tasks);
+      setFilteredTasks(res.data.tasks);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
-  const addTask = (text, dueDate) => {
-    console.log("adding task");
-    const newTasks = [
-      ...tasks,
-      {
-        id: crypto.randomUUID(),
-        text,
-        isCompleted: false,
-        isImportant: false,
-        dueDate,
-      },
-    ];
-    setTasks(newTasks);
-    setFilteredTasks(newTasks);
+  const addTask = async (text, dueDate) => {
+    const token = window.localStorage.getItem("jwt");
+    console.log("adding task", token);
+    try {
+      const res = await api.post(
+        "/tasks",
+        {
+          text,
+          isCompleted: false,
+          isImportant: false,
+          dueDate,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const newTasks = [...tasks, res.data.task];
+      setTasks(newTasks);
+      setFilteredTasks(newTasks);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   const toggleTaskCompletion = (taskId) => {
@@ -110,44 +111,7 @@ function TasksContextProvider({ children }) {
 
     return;
   };
-  const filterByGroup = (id) => {
-    setFilteredTasks(
-      tasks.filter((task) => {
-        return task.groupId === id;
-      })
-    );
-  };
 
-  const addToGroup = (groupId, taskId) => {
-    console.log("Adding to group ", groupId, taskId);
-    const temp = tasks.map((task) => {
-      if (task.id === taskId) {
-        return { ...task, groupId };
-      }
-      return task;
-    });
-    setTasks(temp);
-    setFilteredTasks(temp);
-  };
-  const addGroup = (title) => {
-    console.log("adding group");
-    const newGroups = [
-      ...groups,
-      {
-        groupId: crypto.randomUUID(),
-        title,
-      },
-    ];
-    console.log(newGroups);
-    setGroups(newGroups);
-  };
-
-  const deleteGroup = (id) => {
-    const newGroups = groups.filter((g) => {
-      return g.groupId !== id;
-    });
-    setGroups(newGroups);
-  };
   const deleteTask = (id) => {
     const newTasks = tasks.filter((t) => {
       return t.id !== id;
@@ -168,18 +132,13 @@ function TasksContextProvider({ children }) {
   const value = {
     filteredTasks,
     setFilteredTasks,
-    groups,
-    setGroups,
     addTask,
     toggleTaskCompletion,
     toggleTaskImportance,
     filterTasks,
-    filterByGroup,
-    addToGroup,
-    addGroup,
-    deleteGroup,
     deleteTask,
     searchTasks,
+    fetchTasks,
   };
   return <tasksCtx.Provider value={value}>{children}</tasksCtx.Provider>;
 }

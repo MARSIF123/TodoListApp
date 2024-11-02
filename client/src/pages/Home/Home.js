@@ -11,6 +11,7 @@ function Home() {
   const joinNowHandler = () => {
     navigate("/login");
   };
+
   return (
     <PageLayout>
       <div className={styles.main}>

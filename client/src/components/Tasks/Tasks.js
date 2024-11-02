@@ -5,16 +5,19 @@ import TaskItem from "./TaskItem/TaskItem";
 import TaskInput from "./TaskInput/TaskInput";
 
 function Tasks() {
-  const { filteredTasks } = React.useContext(tasksCtx);
+  const { filteredTasks, fetchTasks } = React.useContext(tasksCtx);
+
+  React.useEffect(() => {
+    fetchTasks();
+  }, []);
 
   return (
     <>
       <div className={styles.scroll}>
         {filteredTasks?.map((task) => (
           <TaskItem
-            key={task.id}
-            id={task.id}
-            groupId={task.groupId}
+            key={task._id}
+            id={task._id}
             isCompleted={task.isCompleted}
             isImportant={task.isImportant}
             dueDate={task.dueDate}
