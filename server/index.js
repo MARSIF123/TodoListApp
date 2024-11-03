@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/api/tasks", taskRouter);
 app.use("/api/users", userRouter);
-app.get("/api/hello", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ message: "hello" });
 });
 
