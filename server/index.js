@@ -13,7 +13,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin:["https://todo-list-app-rust-nine.vercel.app/"],
+  method:["GET","POST","PUT","DELETE"],
+    credentials: true}));
 app.use("/api/tasks", taskRouter);
 app.use("/api/users", userRouter);
 app.get("/", (req, res) => {
