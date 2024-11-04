@@ -4,12 +4,14 @@
   left: 50%;
   transform: translateX(-50%);
   height: 9vh;
-  width: 850px;
+  width: 70%;
   margin: 10px auto;
   background-color: white;
   border-radius: 8px;
   display: flex;
   padding: 5px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .card input {
@@ -26,4 +28,10 @@
   cursor: pointer;
   border: none;
   background-color: inherit;
+}
+
+@media (max-width: 600px) {
+  .card {
+    height: 15vh;
+  }
 }
