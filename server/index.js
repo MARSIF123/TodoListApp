@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors({ origin: ["https://todo-list-app-rust-nine.vercel.app", "http://localhost/3000"] }));
+app.use(cors({ origin: ["https://todo-list-app-rust-nine.vercel.app", "http://10.0.0.212/3000"] }));
 app.use("/api/tasks", taskRouter);
 app.use("/api/users", userRouter);
 app.get("/", (req, res) => {
