@@ -9,8 +9,6 @@ function MyTasks() {
       <div
         style={{
           paddingTop: 8,
-          marginLeft: 250,
-          position: "relative",
           height: "100vh",
           backgroundColor: "var(--primary-color)",
         }}

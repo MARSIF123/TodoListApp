@@ -1,14 +1,17 @@
-.sidebar {
+.card {
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  width: 250px;
   background-color: #fafafa;
   font-size: 32px;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
-
+.sidebar {
+  width: 200px;
+}
 .logo {
   text-align: center;
 }
