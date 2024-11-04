@@ -108,7 +108,7 @@ function TasksContextProvider({ children }) {
       const res = await api.delete(`/tasks/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      const newTasks = tasks.filter((t) => {
+      const newTasks = tasks?.filter((t) => {
         return t._id !== id;
       });
       setTasks(newTasks);
@@ -125,14 +125,14 @@ function TasksContextProvider({ children }) {
     }
     if (type === "important") {
       setFilteredTasks(
-        tasks.filter((task) => {
+        tasks?.filter((task) => {
           return task.isImportant === true;
         })
       );
     }
     if (type === "completed") {
       setFilteredTasks(
-        tasks.filter((task) => {
+        tasks?.filter((task) => {
           return task.isCompleted === true;
         })
       );
@@ -141,7 +141,7 @@ function TasksContextProvider({ children }) {
       const today = new Date();
       console.log({ today });
       setFilteredTasks(
-        tasks.filter((task) => {
+        tasks?.filter((task) => {
           const date = new Date(task.dueDate);
 
           return (
@@ -158,7 +158,7 @@ function TasksContextProvider({ children }) {
 
   const searchTasks = (searchTerm) => {
     const searchTermLowercase = searchTerm.toLowerCase();
-    const temp = tasks.filter((item) => {
+    const temp = tasks?.filter((item) => {
       return Object.values(item).some((value) => {
         return String(value).toLowerCase().includes(searchTermLowercase);
       });
