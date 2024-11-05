@@ -36,8 +36,8 @@ A **Todo List App** built with the MERN stack (MongoDB, Express, React, and Node
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/your-username/mern-task-app.git
-   cd mern-task-app
+   git clone [https://github.com/your-username/mern-task-app.git](https://github.com/MARSIF123/TodoListApp.git)
+   cd TodoListApp
 
 2. **Install Dependencies**
 
@@ -113,17 +113,17 @@ Create a `.env` file in the `server` folder and add the following values:
 ## Screenshots
 
 - **Login Page**: A user-friendly interface for authentication, allowing users to enter their credentials.
-- ![image](https://github.com/user-attachments/assets/722e1675-c6c4-4a1c-9246-2ad485506a84)
+ ![image](https://github.com/user-attachments/assets/722e1675-c6c4-4a1c-9246-2ad485506a84)
 
 
 - **Dashboard**: A comprehensive view displaying a list of tasks, with options to filter, update, and delete tasks.
-- ![image](https://github.com/user-attachments/assets/c6751f08-e61b-4cec-8447-e6333634afcb)
+ ![image](https://github.com/user-attachments/assets/c6751f08-e61b-4cec-8447-e6333634afcb)
 
 - **Sidebar**: A toggle able sidebar displaying a logo, with options to search tasks.
-- ![image](https://github.com/user-attachments/assets/ce62a9f7-ab3b-49bc-aed8-5adf7c602ea5)
+ ![image](https://github.com/user-attachments/assets/ce62a9f7-ab3b-49bc-aed8-5adf7c602ea5)
 
 - **Date Picker**: A user-friendly date & time picker.
-- ![image](https://github.com/user-attachments/assets/3cb87014-21c6-428a-a0a2-410b9d1adfeb)
+ ![image](https://github.com/user-attachments/assets/3cb87014-21c6-428a-a0a2-410b9d1adfeb)
 
 
 
